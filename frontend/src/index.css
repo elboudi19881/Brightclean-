@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bc-primary: #0F4C81;
+  --bc-secondary: #2A7DE1;
+  --bc-accent: #4CC9F0;
+  --bc-bg: #FFFFFF;
+  --bc-bg-soft: #F7F9FC;
+  --bc-text: #1A1A1A;
+  --bc-muted: #64748B;
+  --bc-border: #E2E8F0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bc-bg);
+  color: var(--bc-text);
+  font-family: "IBM Plex Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01" on, "cv11" on;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: "Outfit", "IBM Plex Sans", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: rgba(42, 125, 225, 0.18);
+  color: #0F4C81;
+}
+
+/* Hide horizontal scrollbar globally */
+body { overflow-x: hidden; }
+
+/* Shadcn base tokens kept for ui components */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 211 79% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 213 60% 96%;
+    --secondary-foreground: 211 79% 28%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 199 87% 62%;
+    --accent-foreground: 211 79% 18%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 211 79% 28%;
+    --radius: 18px;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+}
+
+/* Subtle grid background */
+.bc-grid-bg {
+  background-image:
+    radial-gradient(rgba(15,76,129,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bc-radial {
+  background:
+    radial-gradient(60% 50% at 80% 0%, rgba(76,201,240,0.25) 0%, rgba(76,201,240,0) 60%),
+    radial-gradient(45% 40% at 0% 10%, rgba(42,125,225,0.18) 0%, rgba(42,125,225,0) 60%);
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Glass card */
+.bc-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Marquee for testimonials/logos if needed */
+@keyframes bc-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.bc-float { animation: bc-float 6s ease-in-out infinite; }
+
+@keyframes bc-float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(2deg); }
+}
+.bc-float-slow { animation: bc-float-slow 9s ease-in-out infinite; }
+
+/* Buttons */
+.bc-btn-primary {
+  background: var(--bc-primary);
+  color: #fff;
+  border-radius: 18px;
+  padding: 14px 24px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px -10px rgba(15,76,129,0.55);
+}
+.bc-btn-primary:hover {
+  background: #0A365D;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -10px rgba(15,76,129,0.6);
+}
+.bc-btn-secondary {
+  background: #fff;
+  color: var(--bc-primary);
+  border: 1px solid var(--bc-border);
+  border-radius: 18px;
+  padding: 14px 24px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+.bc-btn-secondary:hover {
+  border-color: var(--bc-secondary);
+  color: var(--bc-secondary);
+  transform: translateY(-2px);
+}
+
+/* Card hover lift */
+.bc-card {
+  background: #fff;
+  border: 1px solid #EEF2F7;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.bc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px -16px rgba(15, 76, 129, 0.18);
+  border-color: #E2EAF5;
+}
+
+/* No blue tap highlight on mobile */
+* { -webkit-tap-highlight-color: transparent; }
